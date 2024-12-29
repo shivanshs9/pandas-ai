@@ -90,7 +90,7 @@ class DataFrame(Base):
             "headers": json_data["columns"],
             "rows": json_data["data"],
         }
-        return self.result
+        return json.dumps(self.result)
 
     def to_dict(self) -> dict:
         self.result["value"] = self.value.to_dict(orient="split", date_format="iso")
@@ -106,12 +106,12 @@ class Chart(Base):
         img.show()
 
     def to_dict(self):
-        with open(self.value["value"], "rb") as image_file:
+        with open(self.value, "rb") as image_file:
             image_data = image_file.read()
 
         # Encode the image data to Base64
-        self.result[
-            "value"
-        ] = f"data:image/png;base64,{base64.b64encode(image_data).decode()}"
+        self.result["value"] = (
+            f"data:image/png;base64,{base64.b64encode(image_data).decode()}"
+        )
 
         return self.result
