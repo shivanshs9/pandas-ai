@@ -8,10 +8,10 @@ readme = "README.md"
 packages = [{include = "pandasai"}]
 
 [tool.poetry.dependencies]
-python = ">=3.8,<3.9.7 || >3.9.7,<3.12"
+python = ">3.9.7,<3.13"
 python-dotenv = "^1.0.0"
 pandas = "^2.0.3"
-scipy = "1.10.1"
+scipy = "1.13.0"
 astor = "^0.8.1"
 matplotlib = "^3.7.1"
 pydantic = "^2.6.4"
