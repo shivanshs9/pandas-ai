@@ -1,6 +1,7 @@
 import glob
 import os
 from typing import Any
+import hashlib
 
 try:
     import duckdb
@@ -100,6 +101,13 @@ class Cache:
 
         # make the cache key unique for each combination of dfs
         for df in context.dfs:
-            cache_key += str(df.column_hash)
+            try:
+                cache_key += str(df.column_hash)
+            except AttributeError:
+                # possibly the context.dfs is overriden by the generated code
+                # and it is a regular pandas.DataFrame object now
+                # in this case, we can't use the custom column_hash attribute
+                column_string = ",".join(df.columns)
+                cache_key += str(hashlib.md5(column_string.encode()).hexdigest())
 
         return cache_key

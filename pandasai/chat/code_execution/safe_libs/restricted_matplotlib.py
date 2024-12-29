@@ -66,6 +66,8 @@ class RestrictedMatplotlib(BaseRestrictedModule):
             "set_title",  # Allow setting title directly
             "set_xlabel",
             "set_ylabel",
+            "subplots_adjust",
+            "tight_layout",
         ]
 
         for attr in self.allowed_attributes:
