@@ -31,8 +31,7 @@ Example:
 
 
 def is_langchain_llm(llm) -> bool:
-    return hasattr(llm, "langchain_llm") or isinstance(llm, BaseLanguageModel)
-
+    return isinstance(llm, BaseLanguageModel)
 
 class LangchainLLM(LLM):
     """
